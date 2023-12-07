@@ -1,7 +1,10 @@
 //This is the class that will manage all your APIs
 
 class APIManager {
-    constructor() {
-        this.data = {}
+    constructor(url) {
+        this.url = url
+    }
+    fetch() {
+        return $.get(this.url)
     }
 }
