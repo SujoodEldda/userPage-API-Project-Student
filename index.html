@@ -31,14 +31,14 @@
         <div class="buttons">	
             <button id="displayUser" onclick="displayUser()">Display User</button>
             <button id="Save-User-Page" onclick="saveUser()">Save User Page</button>	
-            <button id="Load-User-Page" onclick="loadUser()">Load User Page</button>		
+            <button id="Load-User-Page" onclick="chooseUser()">Load User Page</button>		
         </div>	
     </div>
 
     <script id="pokemon-container-template" type="text/x-handlebars-template">
         <img id="pokemon-image" src={{img}}>
 
-        {{pokemonName}}
+        <div id="pokemon-text">{{pokemonName}}</div>
    </script>
 
     <script id="friends-container-template" type="text/x-handlebars-template">
@@ -67,8 +67,16 @@
     <script id="meat-container-template" type="text/x-handlebars-template">
         About Me 
         <br><br>
-        {{meat}}
+        <div class="meat-text">{{meat}}</div>
    </script>
+   
+   <script id="choose-container-template" type="text/x-handlebars-template">
+        <br>
+        {{#each keys}}
+        <button id="{{this}}" onclick="loadUser(id)">{{this}}</button>
+        <br>
+        {{/each}}
+    </script>   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
     <script src="pageModel.js"></script>
