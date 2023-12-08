@@ -12,6 +12,4 @@ class pageModel{
         this.img = ''
         this.pic = ''
     }
-        
-    
 }
