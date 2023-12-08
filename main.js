@@ -23,7 +23,6 @@ const saveUser = function(){
 const loadUser = function(){
     let key = localStorage.key(0)
     const currentPageData = JSON.parse(localStorage.getItem(key))
-    console.log(currentPageData.first)
     render.showUserFromLocaStorage(currentPageData)
 }
 
