@@ -29,18 +29,12 @@ class Renderer {
         this.emptying()
         Promise.all(allPromoises).then((Data)=>{
             let [quoteData, meatData, pokemonData, userData, ...friendsData] = Data
-            currentPage.quote = quoteData.quote
-            currentPage.meat = meatData[0]
-            currentPage.first = userData.results[0].name.first
-            currentPage.last = userData.results[0].name.last
-            currentPage.city = userData.results[0].location.city
-            currentPage.country = userData.results[0].location.country
-            currentPage.pic = userData.results[0].picture.medium
             let Allfriends = []
             friendsData.forEach(friend=> {Allfriends.push({name: friend.results[0].name.first+" "+friend.results[0].name.last})})
             currentPage.friends = Allfriends
-            currentPage.pokemonName = (pokemonData.name).charAt(0).toUpperCase() + (pokemonData.name).slice(1)
-            currentPage.img = pokemonData.sprites.front_default
+            currentPage.setAllAtOnce(userData.results[0].name.first, userData.results[0].name.last, userData.results[0].location.city,
+                userData.results[0].location.country, quoteData.quote, meatData[0], (pokemonData.name).charAt(0).toUpperCase() + (pokemonData.name).slice(1),
+                Allfriends, pokemonData.sprites.front_default, userData.results[0].picture.medium)
             this.callTheCommonSection(currentPage)
         })
     }
@@ -49,5 +43,5 @@ class Renderer {
         this.emptying()
         this.callTheCommonSection(Data)
     }
-    
+
 }

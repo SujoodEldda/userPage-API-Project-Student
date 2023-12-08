@@ -25,8 +25,8 @@ const chooseUser = function(){
     render.emptying()
     render.commonSection("choose-container-template",{keys},"quote-container")
 }
+
 const loadUser = function(key){
     const currentPageData = JSON.parse(localStorage.getItem(key))
     render.showUserFromLocaStorage(currentPageData)
 }
-
