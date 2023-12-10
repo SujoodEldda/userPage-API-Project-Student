@@ -25,19 +25,9 @@ class Renderer {
         $(`.${aimDiv}`).append(HTMLToAdd)
     }
     
-    Render(allPromoises, currentPage){
+    Render(currentPage){
         this.emptying()
-        Promise.all(allPromoises).then((Data)=>{
-            let [quoteData, meatData, pokemonData, allUsers] = Data
-            let [userData, ...friendsData] = allUsers.results
-            let Allfriends = []
-            friendsData.forEach(friend=> {Allfriends.push({name: friend.name.first+" "+friend.name.last})})
-            currentPage.friends = Allfriends
-            currentPage.setAllAtOnce(userData.name.first, userData.name.last, userData.location.city,
-                userData.location.country, quoteData.quote, meatData[0], (pokemonData.name).charAt(0).toUpperCase() + (pokemonData.name).slice(1),
-                Allfriends, pokemonData.sprites.front_default, userData.picture.medium)
-            this.callTheCommonSection(currentPage)
-        })
+        this.callTheCommonSection(currentPage)
     }
 
     showUserFromLocaStorage(Data){

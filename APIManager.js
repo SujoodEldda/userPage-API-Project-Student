@@ -1,6 +1,6 @@
 class APIManager {
     constructor(currentPage) {
-        this.data = currentPage
+        this.currentPage = currentPage
     }
     fetch(url) {
         return $.get(url)
@@ -19,6 +19,16 @@ class APIManager {
     }
     promising(render){
         const allPromoises = [this.getQuoteAPI(),this.getMeatAPI(), this.getPokemonAPI(),this.getUserAPI()]
-        render.Render(allPromoises,this.data)
+        Promise.all(allPromoises).then((Data)=>{
+            let [quoteData, meatData, pokemonData, allUsers] = Data
+            let [userData, ...friendsData] = allUsers.results
+            let Allfriends = []
+            friendsData.forEach(friend=> {Allfriends.push({name: friend.name.first+" "+friend.name.last})})
+            currentPage.friends = Allfriends
+            currentPage.setAllAtOnce(userData.name.first, userData.name.last, userData.location.city,
+                userData.location.country, quoteData.quote, meatData[0], (pokemonData.name).charAt(0).toUpperCase() + (pokemonData.name).slice(1),
+                Allfriends, pokemonData.sprites.front_default, userData.picture.medium)
+        })
+        render.Render(this.currentPage)
     }
 }
