@@ -1,5 +1,3 @@
-
-const USER_NUM = 7
 const currentPage = new pageModel()
 const render = new Renderer()
 const apis = new APIManager(currentPage)
@@ -15,7 +13,7 @@ const saveUser = function(){
 const chooseUser = function(){
     let keys = Object.keys(localStorage)
     render.emptying()
-    render.commonSection("choose-container-template",{keys},"quote-container")
+    render.AddTemplateToHTML("choose-container-template",{keys},"quote-container")
 }
 
 const loadUser = function(key){

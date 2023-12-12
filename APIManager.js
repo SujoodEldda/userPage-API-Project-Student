@@ -1,22 +1,33 @@
 class APIManager {
+    
     constructor(currentPage) {
         this.currentPage = currentPage
     }
+
     fetch(url) {
         return $.get(url)
     }
+
     getMeatAPI(){
         return this.fetch(API_MEAT)
     }
+
     getQuoteAPI(){
         return this.fetch(API_QUOTE)
     }
+
     getUserAPI(){
         return this.fetch(API_USER)
     }
-    getPokemonAPI(){
-        return this.fetch(API_POKEMON.replace("randomNum", Math.floor(Math.random() * 949) + 1))
+
+    getRandomNum(){
+       return Math.floor(Math.random() * MAX_POKEMON_NUMBER) + 1
     }
+
+    getPokemonAPI(){
+        return this.fetch(API_POKEMON.replace("randomNum", this.getRandomNum()))
+    }
+    
     promising(render){
         const allPromoises = [this.getQuoteAPI(),this.getMeatAPI(), this.getPokemonAPI(),this.getUserAPI()]
         Promise.all(allPromoises).then((Data)=>{
